@@ -2,7 +2,8 @@
 
 import { useReducer } from "react";
 
-import FormTodo from "@/app/components/form-todo/FormTodo";
+import FormTodo from "@/components/form-todo/FormTodo";
+
 import reducer from "./reducer";
 import { initialTodoFormState } from "./state";
 

@@ -1,4 +1,4 @@
-import type { TodoData } from "@/app/components/form-todo/types";
+import type { TodoData } from "@/components/form-todo/types";
 
 export interface State {
   todoForm: TodoData;

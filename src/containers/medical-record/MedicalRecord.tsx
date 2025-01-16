@@ -2,13 +2,14 @@
 
 import { useReducer } from "react";
 
-import FormMedicalRecordPE from "@/app/components/form-medical-record-pe/form-medical-record-pe";
+import FormMedicalRecordPE from "@/components/form-medical-record-pe/form-medical-record-pe";
+
 import reducer from "./reducer";
 import { initialMedicalRecordState } from "./state";
+import useClearMedicalRecord from "./useClearMedicalRecord";
 
 import type { FormEvent } from "react";
 import type { Action } from "./types";
-import useClearMedicalRecord from "./useClearMedicalRecord";
 
 export default function MedicalRecord() {
   const [state, dispatch] = useReducer(reducer, initialMedicalRecordState);

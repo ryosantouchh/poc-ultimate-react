@@ -1,4 +1,4 @@
-import type { MedicalRecordPEData } from "@/app/components/form-medical-record-pe/types";
+import type { MedicalRecordPEData } from "@/components/form-medical-record-pe/types";
 
 export interface State {
   physicalExam: MedicalRecordPEData;
