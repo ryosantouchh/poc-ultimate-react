@@ -1,15 +1,18 @@
+import { JSX, memo } from "react";
 import { FormMedicalRecordSubjectiveProps } from "./types";
 
-export default function FormMedicalRecordSubjective({
+function FormMedicalRecordSubjective({
   data,
   onChiefComplainChange,
   onVitalSignHeartRateChange,
   onVitalSignTempChange,
 }: FormMedicalRecordSubjectiveProps) {
+  console.log("FormMedicalRecordSubjective -- render");
+
   return (
     <>
+      <label>chiefComplain</label>
       <div>
-        <label>chiefComplain</label>
         <input
           type="text"
           value={data.chiefComplain}
@@ -38,4 +41,16 @@ export default function FormMedicalRecordSubjective({
       </div>
     </>
   );
+}
+
+export default memo<(props: FormMedicalRecordSubjectiveProps) => JSX.Element>(
+  FormMedicalRecordSubjective,
+  areEqualProps,
+);
+
+function areEqualProps(
+  prevProps: Readonly<FormMedicalRecordSubjectiveProps>,
+  newProps: Readonly<FormMedicalRecordSubjectiveProps>,
+) {
+  return prevProps.data === newProps.data;
 }

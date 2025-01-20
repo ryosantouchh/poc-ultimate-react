@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 
 import FormMedicalRecordPE from "@/components/form-medical-record-pe/form-medical-record-pe";
 
@@ -14,12 +14,22 @@ import type { Action } from "./types";
 export default function MedicalRecord() {
   const [state, dispatch] = useReducer(reducer, initialMedicalRecordState);
 
-  // Currying
-  function eventHandler(type: string) {
-    return function (payload: unknown) {
-      dispatch({ type, payload } as Action);
-    };
-  }
+  // NOTE: original event handler => event handler no need to be pure!
+  // function eventHandler(type: string) {
+  //   return function (payload: unknown) {
+  //     dispatch({ type, payload } as Action);
+  //   };
+  // }
+
+  // NOTE: cached this function to prevent generating function while re-rendering
+  const eventHandler = useCallback(
+    (type: string) => {
+      return function (payload: unknown) {
+        dispatch({ type, payload } as Action);
+      };
+    },
+    [dispatch],
+  );
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
