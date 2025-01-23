@@ -1,3 +1,15 @@
+export const initialSubjectiveExam = {
+  chiefComplain: "",
+  vitalSign: {
+    temp: 0,
+    heartRate: 0,
+  },
+};
+
+export const initialObjectiveExam = {
+  value: "",
+};
+
 export const initialMedicalRecordState = {
   shared: {
     petId: null,
@@ -7,13 +19,7 @@ export const initialMedicalRecordState = {
     petName: "",
   },
   physicalExam: {
-    subjective: {
-      chiefComplain: "",
-      vitalSign: {
-        temp: 0,
-        heartRate: 0,
-      },
-    },
+    subjective: initialSubjectiveExam,
     objective: {
       value: "",
     },

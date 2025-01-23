@@ -1,12 +1,21 @@
 import { JSX, memo } from "react";
 
 import type { FormMedicalRecordObjectiveProps } from "./types";
+import {
+  useMedicalRecordDispatch,
+  useMedicalRecordObjectiveContext,
+} from "@/containers/medical-record/contexts";
 
-function FormMedicalRecordObjective({
-  data,
-  onObjectiveValueChange,
-}: FormMedicalRecordObjectiveProps) {
+// function FormMedicalRecordObjective({
+//   data,
+//   onObjectiveValueChange,
+// }: FormMedicalRecordObjectiveProps) {
+
+function FormMedicalRecordObjective() {
   console.log("FormMedicalRecordObjective -- render");
+
+  const state = useMedicalRecordObjectiveContext();
+  const dispatch = useMedicalRecordDispatch()!;
 
   return (
     <>
@@ -14,10 +23,14 @@ function FormMedicalRecordObjective({
         <label>Objective Value</label>
         <input
           type="text"
-          value={data.value}
-          onChange={(e) => {
-            onObjectiveValueChange(e.target.value);
-          }}
+          value={state.value}
+          // onChange={(e) => {
+          //   onObjectiveValueChange(e.target.value);
+          // }}
+
+          onChange={(e) =>
+            dispatch({ type: "SET_OBJECTIVE_VALUE", payload: e.target.value })
+          }
         />
       </div>
     </>
@@ -26,12 +39,12 @@ function FormMedicalRecordObjective({
 
 export default memo<(props: FormMedicalRecordObjectiveProps) => JSX.Element>(
   FormMedicalRecordObjective,
-  areEqualProps,
+  // areEqualProps,
 );
-
-function areEqualProps(
-  prevProps: Readonly<FormMedicalRecordObjectiveProps>,
-  newProps: Readonly<FormMedicalRecordObjectiveProps>,
-) {
-  return prevProps.data === newProps.data;
-}
+//
+// function areEqualProps(
+//   prevProps: Readonly<FormMedicalRecordObjectiveProps>,
+//   newProps: Readonly<FormMedicalRecordObjectiveProps>,
+// ) {
+//   return prevProps.data === newProps.data;
+// }

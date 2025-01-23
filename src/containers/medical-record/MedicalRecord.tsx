@@ -10,6 +10,7 @@ import useClearMedicalRecord from "./useClearMedicalRecord";
 
 import type { FormEvent } from "react";
 import type { Action } from "./types";
+import MedicalRecordContextProvider from "./contexts";
 
 export default function MedicalRecord() {
   const [state, dispatch] = useReducer(reducer, initialMedicalRecordState);
@@ -38,19 +39,23 @@ export default function MedicalRecord() {
   useClearMedicalRecord({ dispatch });
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <FormMedicalRecordPE
-          data={state.physicalExam}
-          // Subjective
-          onChiefComplainChange={eventHandler("SET_CHIEF_COMPLAIN")}
-          onVitalSignTempChange={eventHandler("SET_VITAL_SIGN_TEMP")}
-          onVitalSignHeartRateChange={eventHandler("SET_VITAL_SIGN_HEART_RATE")}
-          // Objective
-          onObjectiveValueChange={eventHandler("SET_OBJECTIVE_VALUE")}
-        />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <MedicalRecordContextProvider>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <FormMedicalRecordPE
+            data={state.physicalExam}
+            // Subjective
+            onChiefComplainChange={eventHandler("SET_CHIEF_COMPLAIN")}
+            onVitalSignTempChange={eventHandler("SET_VITAL_SIGN_TEMP")}
+            onVitalSignHeartRateChange={eventHandler(
+              "SET_VITAL_SIGN_HEART_RATE",
+            )}
+            // Objective
+            onObjectiveValueChange={eventHandler("SET_OBJECTIVE_VALUE")}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </MedicalRecordContextProvider>
   );
 }
